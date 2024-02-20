@@ -7,21 +7,21 @@
 <body>
 
 <h2>Edit Book</h2>
-
-<form action="@{/books/edit/{id}(id=${book.id})}" method="post" th:object="${book}">
+<form action="@{/books/edit/{id}}" method="post" th:object="${book}">
     <input type="hidden" th:field="*{id}">
+    
     <label for="title">Title:</label>
-    <input type="text" id="title" name="title" th:field="*{title}" required>
-    <br>
+    <input type="text" id="title" name="title" th:field="*{title}" required><br>
+    
     <label for="author">Author:</label>
     <select id="author" name="author.id" th:field="*{author.id}" required>
-        <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
-    </select>
-    <br>
+        <option th:each="a : ${authors}" th:value="${a.id}" th:text="${a.name}" th:selected="${a.id == book.author.id}"></option>
+    </select><br>
+    
     <button type="submit">Save</button>
 </form>
 
-<a href="/books">Back to List</a>
 
+<a href="/books">Back to List</a>
 </body>
 </html>
