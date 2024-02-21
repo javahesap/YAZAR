@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Default Title</title>
+</head>
+<body>
+
+<div id="header">
+    <h1>My Spring-Thymeleaf Website</h1>
+</div>
+
+<div id="content" th:fragment="content">
+    <!-- Content from child pages will be inserted here -->
+</div>
+
+<div id="footer">
+    <p>&copy; 2024 My Website</p>
+</div>
+
+</body>
+</html>

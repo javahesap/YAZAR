@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:include="master.html">
+<head>
+    <title th:text="${title}">Another Child Page</title>
+</head>
+<body>
+
+<div th:replace="master :: content">
+    <!-- Another child page content goes here -->
+    <h2>Welcome to Another Child Page</h2>
+    <p>This is the content of another child page.</p>
+</div>
+
+</body>
+</html>
