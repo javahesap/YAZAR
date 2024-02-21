@@ -1,36 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Book List</title>
 </head>
 <body>
 
-<h2>Book List</h2>
+<div class="container mt-5">
+    <h2>Book List</h2>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.id}"></td>
-        <td th:text="${book.title}"></td>
-        <td th:text="${book.author.name}"></td>
-        <td>
-            <a th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a> |
-            <a th:href="@{/books/delete/{id}(id=${book.id})}">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author.name}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/books/edit/{id}(id=${book.id})}">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </a>
+                <a class="btn btn-danger" th:href="@{/books/delete/{id}(id=${book.id})}">
+                    <span class="glyphicon glyphicon-trash"></span> Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    
+    <a class="btn btn-success" href="/books/new">
+        <span class="glyphicon glyphicon-plus"></span> New Book
+    </a>
+</div>
 
-<a href="/books/new">New Book</a>
+<!-- Bootstrap JS and Popper.js (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
