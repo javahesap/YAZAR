@@ -52,18 +52,17 @@ public class BookController {
         return "book/edit";
     }
 
-    @GetMapping("/edit/{id}")
+    @PostMapping("/edit/{id}")
     public String editBook(@PathVariable Long id, @ModelAttribute Book updatedBook) {
     	
-    	System.out.println("Inside editBookForm method. ID: " + id);
-    	return "";
-      /*  Book book = bookRepository.findById(id).orElse(null);
+   
+       Book book = bookRepository.findById(id).orElse(null);
         if (book != null) {
             book.setTitle(updatedBook.getTitle());
             book.setAuthor(updatedBook.getAuthor());
             bookRepository.save(book);
         }
-        return "redirect:/books";*/
+        return "redirect:/books";
     }
 
     @GetMapping("/delete/{id}")

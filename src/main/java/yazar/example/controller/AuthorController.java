@@ -48,6 +48,7 @@ public class AuthorController {
         Author author = authorRepository.findById(id).orElse(null);
         if (author != null) {
             author.setName(updatedAuthor.getName());
+            author.setLastName(updatedAuthor.getLastName());
             authorRepository.save(author);
         }
         return "redirect:/authors";
