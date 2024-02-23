@@ -38,6 +38,11 @@ public class Book {
 		this.author = author;
 	}
 
+	public void setAuthorId(long numericCellValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
     // Constructors, getters, and setters
 }
 

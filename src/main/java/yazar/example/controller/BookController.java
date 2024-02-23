@@ -1,15 +1,19 @@
 package yazar.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import yazar.example.model.Author;
 import yazar.example.model.Book;
 import yazar.example.repository.AuthorRepository;
 import yazar.example.repository.BookRepository;
+import yazar.example.service.BookfileService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -21,7 +25,8 @@ public class BookController {
 
     @Autowired
     private AuthorRepository authorRepository;
-
+    @Autowired
+    private BookfileService bookService;
     @GetMapping
     public String listBooks(Model model) {
         List<Book> books = bookRepository.findAll();
@@ -70,4 +75,24 @@ public class BookController {
         bookRepository.deleteById(id);
         return "redirect:/books";
     }
+    
+    @GetMapping("/yukle")
+    public String showUploadPage() {
+        return "book/upload"; // Thymeleaf, "resources/templates/upload.html" sayfasını gösterecek
+    }
+    
+
+
+    @PostMapping("/upload")
+    public ResponseEntity<List<Book>> uploadExcelFile(@RequestParam("file") MultipartFile file) {
+        try {
+            List<Book> savedBooks = bookService.processExcelFile(file);
+            return ResponseEntity.ok(savedBooks);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+    
+    
+    
 }
