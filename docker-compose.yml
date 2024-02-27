@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: yazar
+     
+    ports:
+      - "3306:3306"
+
+  your_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - "8022:8080"
