@@ -11,6 +11,7 @@ import yazar.example.model.Author;
 import yazar.example.model.Book;
 import yazar.example.repository.AuthorRepository;
 import yazar.example.repository.BookRepository;
+import yazar.example.service.BookRequestCounterService;
 import yazar.example.service.BookfileService;
 
 import java.io.IOException;
@@ -27,8 +28,21 @@ public class BookController {
     private AuthorRepository authorRepository;
     @Autowired
     private BookfileService bookService;
+    
+    @Autowired
+    private BookRequestCounterService requestCounterService;
+    
     @GetMapping
     public String listBooks(Model model) {
+    	
+    	
+    	 String requestKey = "book:list:requests";
+         
+         if (requestCounterService.isRequestLimitExceeded(requestKey)) {
+             // Belirli bir süre içinde yapılan istek sayısı sınıra ulaştığında bloklama işlemleri
+             return "book/request-limit-exceeded";
+         }
+    	
         List<Book> books = bookRepository.findAll();
         model.addAttribute("books", books);
         return "book/list";
