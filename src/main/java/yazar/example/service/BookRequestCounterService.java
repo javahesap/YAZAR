@@ -38,7 +38,7 @@ public class BookRequestCounterService {
         }
 
         redisTemplate.opsForValue().increment(key, 1);
-        redisTemplate.expire(key, 1, TimeUnit.MINUTES);
+        redisTemplate.expire(key, 2, TimeUnit.MINUTES);
 
         return false;
     }
