@@ -48,6 +48,15 @@ public class BookController {
         return "book/list";
     }
 
+    
+    
+    @GetMapping("/resrtredis")
+    public String resrtredis() {
+    	String requestKey = "book:list:requests";
+    	requestCounterService.resetRequestLimit(requestKey);
+        return "book/resrtredis";
+    }
+    
     @GetMapping("/new")
     public String newBookForm(Model model) {
         List<Author> authors = authorRepository.findAll();

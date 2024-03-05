@@ -36,11 +36,19 @@ public class BookRequestCounterService {
         if (count >= requestLimit) {
             return true;
         }
-
+        //her istekte kaçar kaçar artacak  1 er 1 er artacak
         redisTemplate.opsForValue().increment(key, 1);
+        //iki daki arayla kilitlencek iki dakika sonra resetlem olacak
         redisTemplate.expire(key, 2, TimeUnit.MINUTES);
 
         return false;
     }
+    
+       public void resetRequestLimit(String key) {
+        // Belirli bir anahtar altındaki sayacı sıfırla
+        redisTemplate.opsForValue().set(key, 0);
+    }
+    
+    
 }
 
